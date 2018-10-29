@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Adivinar número</title>
+    <!-- Links JS + Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Archivo JS con las soluciones -->
+    <script src="adiv.js"></script>
+
+    <!-- Casi todo el estilo vuelve a estar hecho con Bootstrap. Aquí encontramos tamaños de padding, varios display: none, tamaños/posicion de letra y poco más -->
+    <style>
+        html {
+            font-size: 1rem;
+            padding: 10px;            
+        }
+
+        div {
+            padding: 10px;        
+        }
+
+        .display-4 {
+            font-size: 2.5rem;
+        }
+        
+        #respuesta, #solucion{
+            display: none;
+        }
+
+        input {
+            text-align: center;
+        }
+        h1 {
+            padding-bottom: 1rem;
+        }
+        
+        #recuento{
+            display: none;
+            font-size: 1.1rem;
+        }
+        
+        #solu {
+            padding-top: 5px;
+        }
+        
+        /* Estilos ligeros para el select y el input */
+        #select, #inputresp {
+            background: none repeat scroll 0 0 #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 5px 5px 5px 5px;
+            box-shadow: 0 0 10px #E8E8E8 inset;                                 
+        }   
+
+        /* Diferentes media query, ajustan el tamaño de la fuente según el ancho del dispositivo*/
+
+        @media (min-width: 576px) {
+            html {
+                font-size: 0.70rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            html {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            html {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            html {
+                font-size: 1.15rem;
+            }
+        }
+
+    </style>
+
+</head>
+
+<!-- Diseño web sencillo, un div con estilo bootstrap que engloba el conjunto. Esta vez encontramos muchos IDs ya que en el jquery se tocan multitud de elementos para cambiar de hidden a visible o viceversa y para presentar las soluciones. Lo más significativo es que mediante jquery el elemento p con id="texto" lo sobrescribimos con un .html() para que el usuario no pueda modificar el número de intentos mientras está realizando el juego -->
+
+<body>
+
+    <div class="container text-center">
+
+        <h1 class="display-4">¡Adivine el número!</h1>
+        <h4>Instrucciones:</h4>
+        <p>Bienvenido al juego de adivinar un número entre 0 y 100. El mecanismo es sencillo, introduce la dificultad que quieras y posteriormente trata de adivinar el número. ¡Buena suerte!</p>
+        <p>Si quieres reiniciar el juego, pulsa F5 o haz click en el siguiente botón: <button id="reset" type="button" class="btn btn-sm">Reiniciar</button></p>
+        <h4>Juego:</h4>
+        <p id="texto"> Selecciona la dificultad:
+            <select id="select">
+                <option value="0">...</option>
+                <option value="1">Imposible, 1 intento</option>
+                <option value="5">Difícil, 5 intentos</option>
+                <option value="10">Normal, 10 intentos</option>
+                <option value="15">Fácil, 15 intentos</option>
+                <option value="20">Regalado, 20 intentos</option>
+            </select>
+        </p>
+        <p id="respuesta">El número es: <input type="text" id="inputresp" size="1" /></p>
+        <p id="recuento">¡Recuerda tus elecciones!: Está entre <span id="menor">""</span> y <span id="mayor">""</span>.</p>
+
+    </div>
+    <div class="container text-center" id="solu">
+       <!-- Este elemento h1 que no se usa al principio estaba vacío, no se veía y no estorbaba, pero el w3c me daba un warning por tenerlo vacío, así que le puse contenido y lo hice invisible. Cuando hace falta utilizarlo, se vuelve visibile con el .show() y se le cambia el contenido con el .html()-->
+        <h1 class="display-4" id="solucion">.</h1> 
+    </div>
+
+
+
+</body>
+
+</html>
